@@ -1,0 +1,82 @@
+# source plateform agnostic .zshrc
+source ~/Dropbox/Apps/dotfiles/.zshrc
+
+export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim -gf'
+
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
+# PATH {{{
+
+# Homebrew
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+
+# }}}
+
+# Alias - General {{{
+
+alias f='open -a Finder ./'
+
+alias zshrcosx='open ~/Dropbox/Apps/dotfiles/.zshrc-osx'
+alias imgdim='sips -g pixelHeight -g pixelWidth'
+
+# To use the iTerm2 version of tmux
+alias t="tmux -C"
+alias ta="tmux -C attach -t"
+
+# Web
+alias hosts='sudo mvim /etc/hosts'
+alias httpd.conf='sudo mvim /etc/apache2/httpd.conf'
+alias httpds.conf='sudo mvim /etc/apache2/extra/httpd-ssl.conf'
+alias vhosts='sudo mvim /etc/apache2/extra/httpd-vhosts.conf'
+
+alias myup='sudo /usr/local/mysql/support-files/mysql.server start'
+alias mydown='sudo /usr/local/mysql/support-files/mysql.server stop'
+alias jbossup="sh /usr/local/jboss/jboss-as-7.1.1.Final/bin/standalone.sh"
+
+alias apacheerrorlog="cat /var/log/apache2/error_log | less"
+alias apacheaccesslog="cat /var/log/apache2/error_log | less"
+
+# Misc functions
+power () {
+ max=$(ioreg -l | fgrep MaxCapacity | cut -d= -f2 | tr -d " ");
+ cur=$(ioreg -l | fgrep CurrentCapacity | cut -d= -f2 | tr -d " ");
+ battery=$(awk -v "a=$max" -v "b=$cur" 'BEGIN{printf("%.2f%%", b/a * 100)}');
+ echo "$battery"
+}
+function pman () { man -t "${1}" | open -f -a /Applications/Preview.app }
+function cpwd () { echo -n $(pwd) | pbcopy }
+function clip() {
+  type=`file "$1"|grep -c text`
+  if [ $type -gt 0 ]; then
+    cat "$@"|pbcopy
+    echo "Contents of $1 are in the clipboard."
+  else
+    echo "File \"$1\" is not plain text."
+  fi
+}
+
+# Override for OSX only
+alias zshrc='open ~/Dropbox/Apps/dotfiles/.zshrc'
+alias zshrcosx='open ~/Dropbox/Apps/dotfiles/.zshrc-osx'
+
+# }}}
+
+# OSX {{{
+
+alias nfsmount="sudo mvim /etc/exports"
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
+
+# Flush Directory Service cache
+alias flush="dscacheutil -flushcache"
+
+# Empty the Trash
+alias emptytrash="rm -rfv ~/.Trash"
+alias externaltrash="rm -rfv /Volumes/*/.Trashes/501/*"
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# }}}

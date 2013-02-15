@@ -1,0 +1,13 @@
+# use less by default
+--pager=less
+
+# always colorize
+--color
+
+--type-set=zdb=.zdb
+--type-set=haml=.haml
+--type-set=sass=.sass
+--type-set=sass=.scss
+
+-a
+--sort-files

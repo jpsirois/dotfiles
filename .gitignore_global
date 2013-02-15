@@ -1,0 +1,17 @@
+# Editor settings
+.sass-cache
+Guardfile
+
+# OS generated files
+Icon?
+.DS_Store*
+._*
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+.dropbox
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+

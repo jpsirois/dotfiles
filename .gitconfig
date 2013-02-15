@@ -1,0 +1,29 @@
+[user]
+	email    = email@jpsirois.com
+	name     = jpsirois
+
+[credential]
+	helper = osxkeychain
+
+[core]
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+	;whitespace = cr-at-eol
+
+[color]
+	sh = auto
+	ui = auto
+
+[alias]
+	unstage  = reset HEAD           # unstage
+	clear    = reset --hard HEAD    # erase uncommited file edits (destructive!)
+	uncommit = reset HEAD~1         # erase last commit but keeps related file edits
+	rollback = reset --hard HEAD~1  # erase last commit and related file edits (destructive!)
+
+[diff]
+	tool = araxis
+[difftool]
+	prompt = false
+[merge]
+	log = true
+	tool = araxis
